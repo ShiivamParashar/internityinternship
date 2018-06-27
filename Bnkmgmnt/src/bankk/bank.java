@@ -15,8 +15,10 @@ public class bank {
 	String date = new SimpleDateFormat("dd/MMM/yyyy").format(d);
 	String time = new SimpleDateFormat("HH:mm:ss").format(d);
 	
+	DbOperations dbOps = new DbOperations();
 	
-	void credit(int accNo){
+	
+	void credit(int accNo ,String name){
 		try 
 		{
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -33,6 +35,10 @@ public class bank {
 				System.out.println("Amount Credited");
 				System.out.println("New amount " + acc.accountBal);
 				
+//				b is final , camount is transaction amount 
+				dbOps.createTransaction(accNo, "credit", camount, false ,b,name);
+				
+				
 				Account.miniState.add("Account "+accNo+" is credited with Rs"+camount + "on date"+date+ "at time" + time);			}
 			    else
 				System.out.println("Amount can't be negative");
@@ -46,7 +52,7 @@ public class bank {
 		
 	}
 	
-	public void debit(int accNo){
+	public void debit(int accNo,String name){
 		try 
 		{
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -68,7 +74,7 @@ public class bank {
 					Acc.put(accNo, acc);
 					System.out.println("Amount Debited");
 					System.out.println("New amount " + acc.accountBal);
-				
+					dbOps.createTransaction(accNo, "debit", damount, false ,b,name);
 				
 					Account.miniState.add("Account "+accNo+" is debited with Rs"+damount);
 				

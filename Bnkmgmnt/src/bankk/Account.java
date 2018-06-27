@@ -42,11 +42,11 @@ import java.util.ArrayList;
 					switch(ch)
 					{
 						case 1:
-								bank.credit(accountNo);
+								bank.credit(accountNo,accHolderName);
 								break;
 								
 						case 2: 
-								bank.debit(accountNo);
+								bank.debit(accountNo,accHolderName);
 								break;
 								
 						case 3: for(int i=0;i<Account.miniState.size();i++)
